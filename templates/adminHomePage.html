@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FixIt-HomePage</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/adminHomePage8.css">
+    .css">
+</head>
+<body>
+    
+<div id="header">
+    <nav class="navbar navbar-expand-lg">
+        <h3 class="h3 text">FixIt</h3>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="/logout" class="btn text"><b>Logout</b></a>
+                </li>   
+            </ul>
+        </div>
+    </nav>
+</div>
+    
+    <div id="main">
+        <div class="d-flex flex-row  justify-content-center">
+            <div class="p-2 rounded-2 " id="message"><h2 class="h2 text">Welcome  {{name}}</h1>
+                {% with messages=get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <p class="text">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <form class="form-outline" action="/load" method="POST">
+                    <select class="form-control form-control-lg" id="citySelector" name="citySelector">
+                        <option value="Hyderabad">Hyderabad</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Banglore">Banglore</option>
+                    </select>
+                    <br>
+                    <button type='submit' class="btn btn-primary btn-large" value="load">Submit</button>
+                </form>
+                
+            
+            </div>
+                
+        </div>
+        <div class="d-flex flex-row justify-content-center">
+            <div class="p-2 rounded-2 " id="record-box">
+                <div class="row">
+                    {% for garage in data %} 
+                        <div class=" col-lg-4 card">
+                            <div class="card-body">
+                                <div class="card-title"><h2 class="h2 text">{{garage['name']}}</h2></div>
+                                <div class="card-text">
+                                    <ul class="list-group">
+                                        <li class="list-group-item text" ><strong>Phno:</strong>{{garage['phno']}}</li>
+                                        <li class="list-group-item text"><strong>Location:</strong>{{garage['location']}}</li>
+                                    </ul>
+                                </div>
+                            </div>  
+                        </div>
+                         
+                    {% endfor %}
+                    
+                </div>  
+            </div>
+        </div>
+    </div>
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    
+</body>
+</html>
